@@ -3,6 +3,8 @@ package br.ce.cristhiann.servicos;
 import br.ce.cristhiann.entidades.Filme;
 import br.ce.cristhiann.entidades.Locacao;
 import br.ce.cristhiann.entidades.Usuario;
+import br.ce.cristhiann.exceptions.FilmeSemEstoqueException;
+import br.ce.cristhiann.exceptions.LocadoraException;
 import br.ce.cristhiann.utils.DataUtils;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -89,6 +91,22 @@ public class LocacaoServiceTest {
 
         //acao
         service.alugarFilme(usuario, filme);
+
+    }
+
+    @Test
+    public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
+
+        //cenario
+        LocacaoService service = new LocacaoService();
+        Filme filme = new Filme("Filme 1", 0 , 5.0);
+
+        //acao
+        try {
+            service.alugarFilme(null, filme);
+        } catch (LocadoraException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
