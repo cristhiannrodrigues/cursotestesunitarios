@@ -7,6 +7,7 @@ import br.ce.cristhiann.exceptions.FilmeSemEstoqueException;
 import br.ce.cristhiann.exceptions.LocadoraException;
 import br.ce.cristhiann.utils.DataUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -20,17 +21,23 @@ import static org.junit.Assert.assertTrue;
 
 public class LocacaoServiceTest {
 
+    private LocacaoService service;
+
     @Rule
     public ErrorCollector error = new ErrorCollector();
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    @Before
+    public void before() {
+        service = new LocacaoService();
+    }
+
     @Test
     public void teste() throws Exception {
 
         //cenario
-        LocacaoService service = new LocacaoService();
         Usuario usuario = new Usuario("Usuario 1");
         Filme filme = new Filme("Filme 1", 2 , 5.0);
 
@@ -49,7 +56,6 @@ public class LocacaoServiceTest {
     public void testeLocacao_filmeSemEstoque() throws Exception {
 
         //cenario
-        LocacaoService service = new LocacaoService();
         Usuario usuario = new Usuario("Usuario 1");
         Filme filme = new Filme("Filme 1", 0 , 5.0);
 
@@ -63,7 +69,6 @@ public class LocacaoServiceTest {
     public void testeLocacao_filmeSemEstoque_2() {
 
         //cenario
-        LocacaoService service = new LocacaoService();
         Usuario usuario = new Usuario("Usuario 1");
         Filme filme = new Filme("Filme 1", 0 , 5.0);
 
@@ -98,7 +103,6 @@ public class LocacaoServiceTest {
     public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
 
         //cenario
-        LocacaoService service = new LocacaoService();
         Filme filme = new Filme("Filme 1", 0 , 5.0);
 
         //acao
