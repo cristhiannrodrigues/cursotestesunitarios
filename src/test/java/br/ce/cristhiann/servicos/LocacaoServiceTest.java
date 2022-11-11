@@ -13,7 +13,9 @@ import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,7 +37,7 @@ public class LocacaoServiceTest {
     }
 
     @Test
-    public void teste() throws Exception {
+    public void deveAlugarFilme() throws Exception {
 
         //cenario
         Usuario usuario = new Usuario("Usuario 1");
@@ -100,7 +102,7 @@ public class LocacaoServiceTest {
     }
 
     @Test
-    public void testLocacao_usuarioVazio() throws FilmeSemEstoqueException {
+    public void testeLocacao_usuarioVazio() throws FilmeSemEstoqueException {
 
         //cenario
         Filme filme = new Filme("Filme 1", 0 , 5.0);
@@ -112,6 +114,21 @@ public class LocacaoServiceTest {
             throw new RuntimeException(e);
         }
 
+    }
+
+    @Test
+    public void devePagar75Pct() {
+
+        //cenario
+        Usuario usuario = new Usuario("User 1");
+        List<Filme> filmes = Arrays.asList(
+                new Filme("Filme 1", 2, 4.0),
+                new Filme("Filme 2", 2, 4.0),
+                new Filme("Filme 3", 2, 4.0)
+        );
+        //acao
+        Locacao locacao = service.alugarFilme(usuario, filmes);
+        //verificaocao
     }
 
 }
